@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10152f">
+<title>12 дверей — Путешествие в Новый год</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&display=swap');
+
+:root {
+  --night:#10152f;
+  --blue:#19264b;
+  --gold:#d8b978;
+  --pale:#f3e8d2;
+  --silver:#c9d4e9;
+  --lavender:#b9acd8;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  min-height:100vh;
+  color:var(--pale);
+  font-family:'Manrope',sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 10%,#34446c 0%,transparent 45%),
+    radial-gradient(ellipse at 10% 80%,#302b58 0%,transparent 40%),
+    linear-gradient(145deg,#0b1026,#182344 55%,#10152f);
+  overflow-x:hidden;
+}
+body:before {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.45;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%,white 99%,transparent),
+    radial-gradient(2px 2px at 80% 15%,#e8d8ae 99%,transparent),
+    radial-gradient(1px 1px at 45% 65%,white 99%,transparent),
+    radial-gradient(2px 2px at 90% 75%,#c9d4e9 99%,transparent),
+    radial-gradient(1px 1px at 25% 90%,white 99%,transparent);
+  background-size:180px 180px;
+}
+main {
+  width:min(100%,760px);
+  margin:auto;
+  padding:24px 20px 60px;
+  position:relative;
+}
+.screen { display:none; animation:appear .7s ease; }
+.screen.active { display:block; }
+@keyframes appear {
+  from { opacity:0; transform:translateY(12px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.topline {
+  text-align:center;
+  color:var(--silver);
+  font-size:10px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin:12px 0 32px;
+}
+h1,h2,h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;
+  text-align:center;
+}
+h1 {
+  font-size:clamp(48px,12vw,76px);
+  line-height:.95;
+  color:#f4e6c7;
+  margin:16px 0;
+  text-shadow:0 0 35px #d8b97855;
+}
+h2 { font-size:clamp(34px,8vw,48px); margin:12px 0 18px; }
+h3 { font-size:27px; color:var(--gold); }
+p { line-height:1.8; font-size:14px; color:#e2e2eb; }
+.subtitle {
+  text-align:center;
+  color:#d6c9e5;
+  font-family:'Cormorant Garamond',serif;
+  font-size:23px;
+  line-height:1.4;
+}
+.ornament {
+  text-align:center;
+  color:var(--gold);
+  font-size:25px;
+  letter-spacing:12px;
+  margin:22px 0;
+}
+.hero {
+  min-height:85vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.door-art {
+  width:190px;
+  height:265px;
+  margin:25px auto;
+  border:2px solid var(--gold);
+  border-radius:100px 100px 5px 5px;
+  background:
+    radial-gradient(ellipse at 50% 45%,#d8b97833,transparent 60%),
+    linear-gradient(145deg,#29365f,#111831);
+  box-shadow:0 0 25px #d8b97844,inset 0 0 25px #d8b97822;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.door-art:before {
+  content:"✧";
+  font-size:100px;
+  color:var(--gold);
+  text-shadow:0 0 25px #e8d5a6;
+}
+.door-art:after {
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid #d8b97888;
+  border-radius:90px 90px 2px 2px;
+}
+button {
+  font-family:'Manrope',sans-serif;
+  cursor:pointer;
+}
+.primary {
+  display:block;
+  width:min(100%,310px);
+  margin:28px auto 12px;
+  padding:16px 22px;
+  border:1px solid #f1d79d;
+  border-radius:40px;
+  color:#1a1c30;
+  background:linear-gradient(120deg,#e7d3a5,#bd9b5c);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  box-shadow:0 5px 25px #d8b97833;
+  transition:.3s;
+}
+.primary:active { transform:scale(.98); }
+.secondary {
+  display:block;
+  margin:20px auto;
+  background:transparent;
+  border:0;
+  color:var(--silver);
+  padding:12px;
+  font-size:13px;
+}
+.card {
+  padding:25px 20px;
+  border:1px solid #d8b97855;
+  border-radius:18px;
+  background:linear-gradient(145deg,#ffffff0c,#ffffff04);
+  box-shadow:0 12px 35px #05081744;
+  margin:22px 0;
+}
+.center { text-align:center; }
+.small { color:#bfc8df; font-size:12px; }
+.door-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+  margin:25px 0;
+}
+.door {
+  min-height:125px;
+  border:1px solid #d8b97866;
+  border-radius:65px 65px 12px 12px;
+  background:linear-gradient(150deg,#34436b,#151c38);
+  color:#f0dfba;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  box-shadow:inset 0 0 20px #d8b97818,0 5px 15px #05081755;
+}
+.door span:first-child { font-size:28px; }
+.door span:last-child { font-size:10px; letter-spacing:1px; }
+.door.locked { opacity:.48; }
+.question {
+  margin:22px 0;
+  color:#f0e5d2;
+  font-family:'Cormorant Garamond',serif;
+  font-size:23px;
+  line-height:1.3;
+}
+textarea {
+  width:100%;
+  min-height:95px;
+  resize:vertical;
+  padding:14px;
+  border:1px solid #b9acd866;
+  border-radius:12px;
+  background:#10172eaa;
+  color:#fff4df;
+  font:14px 'Manrope',sans-serif;
+  outline:none;
+}
+textarea:focus { border-color:var(--gold); }
+textarea::placeholder { color:#9da8c2; }
+.symbol {
+  color:var(--gold);
+  font-size:42px;
+  text-align:center;
+  margin:15px;
+}
+footer {
+  text-align:center;
+  color:#aab5d0;
+  font-size:10px;
+  letter-spacing:2px;
+  margin-top:55px;
+}
+@media(max-width:380px) {
+  main { padding-left:14px; padding-right:14px; }
+  .door-grid { gap:8px; }
+  .door { min-height:112px; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<section id="home" class="screen active">
+  <div class="hero">
+    <div class="topline">Маленькое путешествие к себе</div>
+    <div class="ornament">✧ ❄ ✧</div>
+    <div class="door-art"></div>
+    <h1>12 дверей</h1>
+    <div class="subtitle">Путешествие в Новый год</div>
+    <div class="ornament">✦ ✧ ✦</div>
+    <p>За каждой дверью скрыто маленькое чудо.<br>А за всеми двенадцатью — встреча с собой.</p>
+    <button class="primary" onclick="show('welcome')">НАЧАТЬ ПУТЕШЕСТВИЕ</button>
+    <div class="small">Оставьте за порогом спешку. Здесь начинается ваша история.</div>
+  </div>
+</section>
+
+<section id="welcome" class="screen">
+  <div class="topline">Ваше путешествие начинается</div>
+  <div class="symbol">✧</div>
+  <h2>Добро пожаловать!</h2>
+  <div class="card">
+    <p class="center">Иногда, чтобы открыть новую дверь, нужно сначала оглянуться назад.</p>
+    <p class="center">Впереди вас ждут двенадцать шагов. Каждый из них — возможность услышать себя, вспомнить важное, отпустить лишнее и бережно приблизиться к своим мечтам.</p>
+    <p class="center">Не торопитесь. Здесь нет правильных или неправильных ответов. Есть только ваша история.</p>
+  </div>
+  <button class="primary" onclick="show('map')">ВОЙТИ В ПУТЕШЕСТВИЕ</button>
+  <button class="secondary" onclick="show('home')">Вернуться</button>
+</section>
+
+<section id="map" class="screen">
+  <div class="topline">Карта волшебного путешествия</div>
+  <h2>Двенадцать дверей</h2>
+  <p class="center">Каждая дверь хранит свою историю и свой символ. Первая уже ждёт вас.</p>
+  <div class="ornament">✧ ❄ ✧</div>
+  <div class="door-grid" id="doorGrid"></div>
+  <p class="small center">Остальные двери будут открываться по мере нашего путешествия.</p>
+  <button class="secondary" onclick="show('welcome')">Вернуться</button>
+</section>
+
+<section id="first" class="screen">
+  <div class="topline">Дверь первая · Зеркало воспоминаний</div>
+  <div class="symbol">❄ ✧ ❄</div>
+  <h2>Зеркало воспоминаний</h2>
+  <p class="center">Прежде чем шагнуть навстречу новому, давайте бережно вспомним год, который остаётся позади.</p>
+  <div class="card">
+    <div class="question">1. Какое событие этого года вам особенно запомнилось?</div>
+    <textarea id="q1" placeholder="Вспомните этот момент..."></textarea>
+    <div class="question">2. Какой момент принёс вам радость или тепло?</div>
+    <textarea id="q2" placeholder="Пусть это воспоминание снова согреет вас..."></textarea>
+    <div class="question">3. С какой трудностью вы столкнулись и что помогло вам пройти через неё?</div>
+    <textarea id="q3" placeholder="Вспомните свою силу..."></textarea>
+    <div class="question">4. Какой важный урок вы вынесли из этого года?</div>
+    <textarea id="q4" placeholder="Что вы поняли о себе и жизни?"></textarea>
+    <div class="question">5. За что вы можете сегодня похвалить себя?</div>
+    <textarea id="q5" placeholder="Вы заслуживаете добрых слов..."></textarea>
+  </div>
+  <button class="primary" onclick="finishFirst()">ЗАВЕРШИТЬ И ОТКРЫТЬ ПОДАРОК</button>
+  <button class="secondary" onclick="show('map')">Вернуться к дверям</button>
+</section>
+
+<section id="gift" class="screen">
+  <div class="topline">Ваш первый волшебный символ</div>
+  <div class="symbol" style="font-size:75px">🗝</div>
+  <h2>Золотой ключ воспоминаний</h2>
+  <div class="card center">
+    <p>Вы открыли первую дверь и встретились со своей историей.</p>
+    <p>Всё, что вы прожили, стало частью вашего пути. Ваша радость, ваша смелость, ваши открытия и даже непростые дни — всё это имеет значение.</p>
+    <h3>Ваш путь уже полон силы.</h3>
+    <p>Сохраните этот символ. Он станет частью вашего будущего оберега двенадцати сил.</p>
+  </div>
+  <button class="primary" onclick="show('map')">ВЕРНУТЬСЯ К КАРТЕ</button>
+  <button class="secondary" onclick="show('notes')">Посмотреть мои ответы</button>
+</section>
+
+<section id="notes" class="screen">
+  <div class="topline">Ваши воспоминания</div>
+  <h2>Моя история</h2>
+  <div id="savedAnswers" class="card"></div>
+  <button class="primary" onclick="show('map')">К КАРТЕ ДВЕРЕЙ</button>
+</section>
+
+<footer>✧ 12 ДВЕРЕЙ · ПУТЕШЕСТВИЕ В НОВЫЙ ГОД ✧</footer>
+</main>
+
+<script>
+const names = [
+  "Воспоминания","Благодарность","Отпускание","Моя сила",
+  "Мечты","Желания","Внутренний свет","Доверие",
+  "Любовь","Новый путь","Магия","Оберег"
+];
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderDoors() {
+  const grid = document.getElementById('doorGrid');
+  grid.innerHTML = '';
+  names.forEach((name,i) => {
+    const b = document.createElement('button');
+    b.className = 'door' + (i===0 ? '' : ' locked');
+    b.innerHTML = `<span>${i===0?'✧':'🔒'}</span><span>ДВЕРЬ ${i+1}</span><span>${name}</span>`;
+    b.onclick = () => {
+      if(i===0) {
+        loadAnswers();
+        show('first');
+      } else {
+        alert('Эта дверь пока хранит свою тайну. Скоро мы её откроем!');
+      }
+    };
+    grid.appendChild(b);
+  });
+}
+
+function saveAnswers() {
+  const answers = {};
+  for(let i=1;i<=5;i++) {
+    answers['q'+i] = document.getElementById('q'+i).value;
+  }
+  localStorage.setItem('12doors-final-answers',JSON.stringify(answers));
+  localStorage.setItem('12doors-final-first-done','yes');
+}
+
+function loadAnswers() {
+  const raw = localStorage.getItem('12doors-final-answers');
+  if(!raw) return;
+  const answers = JSON.parse(raw);
+  for(let i=1;i<=5;i++) {
+    document.getElementById('q'+i).value = answers['q'+i] || '';
+  }
+}
+
+function finishFirst() {
+  saveAnswers();
+  show('gift');
+  renderDoors();
+}
+
+function renderNotes() {
+  const raw = localStorage.getItem('12doors-final-answers');
+  const container = document.getElementById('savedAnswers');
+  if(!raw) {
+    container.textContent = 'Ваши ответы пока не сохранены.';
+    return;
+  }
+  const answers = JSON.parse(raw);
+  const questions = [
+    'Какое событие этого года вам особенно запомнилось?',
+    'Какой момент принёс вам радость или тепло?',
+    'С какой трудностью вы столкнулись и что помогло вам пройти через неё?',
+    'Какой важный урок вы вынесли из этого года?',
+    'За что вы можете сегодня похвалить себя?'
+  ];
+  container.innerHTML = '';
+  questions.forEach((q,i) => {
+    const block = document.createElement('div');
+    const title = document.createElement('h3');
+    const answer = document.createElement('p');
+    title.textContent = q;
+    answer.textContent = answers['q'+(i+1)] || 'Ответ не заполнен.';
+    block.append(title,answer);
+    container.appendChild(block);
+  });
+}
+
+document.querySelector('button.secondary[onclick="show(\'notes\')"]')
+  ?.addEventListener('click',renderNotes);
+
+renderDoors();
+</script>
+</body>
+</html>
